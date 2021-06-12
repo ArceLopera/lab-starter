@@ -4,7 +4,7 @@ description: This is a self-guided course to learn about basic bash scripting. #
 
 # Repository setup
 # The following section template information for the repository
-# This will be used when the repository is crated for each individual learner
+# This will be used when the repository is crated for each individual learner 2
 
 template:
   name:  bash-course   # the name of the repository when it is created for the learner
