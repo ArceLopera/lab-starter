@@ -4,7 +4,7 @@ description: This is a self-guided course to learn about basic bash scripting. #
 
 # Repository setup
 # The following section template information for the repository
-# This will be used when the repository is crated for each individual learner
+# This will be used when the repository is crated for each individual learner 2
 
 template:
   name:  bash-course   # the name of the repository when it is created for the learner
@@ -14,7 +14,8 @@ template:
 # Actions to take place after the learner registers, but before they start interacting with their repo
 
 before:
-- type: # the type of action, full list at https://lab.github.com/docs/actions/
+- type: respond
+  with: 01_first-response.md
   # some actions require additional options, those should appear below `type:`
   # you can execute multiple actions in the `before` block
 
@@ -26,35 +27,43 @@ steps:
 # Step 1: EDIT HERE - INTERNAL COMMENT DESCRIBING STEP 
 - title: Basic Linux commands # the title of the step, shown to the learner in the course progress page
   description: An overview of the most common commands # a description of the step, shown to the learner in the course progress page
-  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+  event: pull_request.synchronize # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
   actions: # a list of the actions that will occur when the step is triggered by an event
-  - type: # the type of action, full list at https://lab.github.com/docs/actions
-
+  - type: gate
+    left: '%payload.pull_request.base.ref%'
+    operator: ===
+    right: main
+    else:
+    - type: respond
+      with: 01_try-again.md
+  - type: respond
+    with: 01_nice-work.md
+  
 # Step 2: EDIT HERE -INTERNAL COMMENT FOR STEP 2
 - title: Bash introduction # the title of the step, shown to the learner in the course progress page
   description: An overview of the most common commands # a description of the step, shown to the learner in the course progress page
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+  event: commit_comment # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 3: EDIT HERE - INTERNAL COMMENT FOR STEP 3
  - title: Bash Functions # the title of the step, shown to the learner in the course progress page
    description: Simple scripts in bash # a description of the step, shown to the learner in the course progress page
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+   event: issue_commented.created # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 4: EDIT HERE - INTERNAL COMMENT FOR STEP 4
 - title: Scripting in bash  # the title of the step, shown to the learner in the course progress page
   description: Additional features # a description of the step, shown to the learner in the course progress page
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+  event: status # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 5: EDIT HERE - INTERNAL COMMENT FOR STEP 5
  - title: AWK and bash # the title of the step, shown to the learner in the course progress page
   description: An overview of AWK # a description of the step, shown to the learner in the course progress page
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+  event: push # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
